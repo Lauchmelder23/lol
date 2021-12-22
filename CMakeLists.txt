@@ -18,10 +18,7 @@ add_library(lol STATIC
 	"src/Transformable.cpp"
 	"src/Shader.cpp"
 	"src/VertexArrayObject.cpp"
-)
-
-target_sources(lol PUBLIC 
-	vendor/glad/src/glad.c
+	"vendor/glad/src/glad.c"
 )
 
 target_include_directories(lol PUBLIC 

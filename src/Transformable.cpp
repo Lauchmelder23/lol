@@ -1,4 +1,4 @@
-#include "backend/Transformable.hpp"
+#include <lol/Transformable.hpp>
 
 Transformable::Transformable() :
 	position(0.0f), scale(1.0f), orientation(glm::vec3(0.0, 0.0, 0.0))
