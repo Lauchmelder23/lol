@@ -1,15 +1,20 @@
 #pragma once
 
-struct Rect
+namespace lol
 {
-	float x, y;
-	float w, h;
-};
 
-struct BoundingBox
-{
-	float x, y, z;
-	float w, h, d;
-};
+	struct Rect
+	{
+		float x, y;
+		float w, h;
+	};
 
-typedef BoundingBox BBox;
+	struct BoundingBox
+	{
+		float x, y, z;
+		float w, h, d;
+	};
+
+	typedef BoundingBox BBox;
+
+}
