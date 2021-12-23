@@ -19,7 +19,7 @@ add_library(lol STATIC
 	"src/Shader.cpp"
 	"src/VertexArrayObject.cpp"
 	"vendor/glad/src/glad.c"
-)
+ "include/lol/Texture.hpp" "src/Texture.cpp"   "include/lol/util/Factory.hpp"  )
 
 target_include_directories(lol PUBLIC 
 	${GLM_INCLUDE_DIRS}

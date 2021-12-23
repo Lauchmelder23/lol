@@ -63,10 +63,4 @@ namespace lol
 		std::map<unsigned int, std::shared_ptr<Type>> objects;
 	};
 
-	class AbstractShader;
-	class AbstractVertexArrayObject;
-
-	typedef ObjectManager<AbstractVertexArrayObject> VAOManager;
-	typedef ObjectManager<AbstractShader> ShaderManager;
-
 }

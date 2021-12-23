@@ -6,14 +6,16 @@
 
 #include <glm/glm.hpp>
 
-#include <lol/NonCopyable.hpp>
+#include <lol/util/NonCopyable.hpp>
+#include <lol/util/Factory.hpp>
+#include <lol/util/ObjectManager.hpp>
 
 namespace lol
 {
 
 	class AbstractShader : public NonCopyable
 	{
-		friend class ShaderFactory;
+		PRODUCT(AbstractShader);
 
 	public:
 		AbstractShader(const std::string& vertexShader, const std::string& fragmentShader);
@@ -32,14 +34,6 @@ namespace lol
 	};
 
 	typedef std::shared_ptr<AbstractShader> Shader;
-
-	class ShaderFactory
-	{
-	public:
-		inline static Shader Produce(const std::string& vertexShader, const std::string& fragmentShader)
-		{
-			return std::make_shared<AbstractShader>(vertexShader, fragmentShader);
-		}
-	};
-
+	typedef Factory<AbstractShader> ShaderFactory;
+	typedef ObjectManager<AbstractShader> ShaderManager;
 }

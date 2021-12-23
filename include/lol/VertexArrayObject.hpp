@@ -3,7 +3,9 @@
 #include <vector>
 #include <memory>
 
-#include <lol/NonCopyable.hpp>
+#include <lol/util/NonCopyable.hpp>
+#include <lol/util/Factory.hpp>
+#include <lol/util/ObjectManager.hpp>
 
 namespace lol
 {
@@ -30,16 +32,19 @@ namespace lol
 	};
 
 	// VAO structure that sets up the buffers and deletes them at the end of the lifecycle
-	class AbstractVertexArrayObject : public NonCopyable
+	class AbstractVertexArrayObject : 
+		public NonCopyable
 	{
-		friend class VAOFactory;
+		PRODUCT(AbstractVertexArrayObject);
 
 	public:
 		AbstractVertexArrayObject() = delete;
-		AbstractVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage);
 		~AbstractVertexArrayObject();
 
 		void Render(unsigned int mode = 4);
+
+	private:
+		AbstractVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage = Usage::Static);
 
 	private:
 		unsigned int vao, vbo, ebo;
@@ -53,13 +58,9 @@ namespace lol
 	typedef std::shared_ptr<AbstractVertexArrayObject> VertexArrayObject;
 
 	// Factory for creating said shared pointers.
-	class VAOFactory
-	{
-	public:
-		static VertexArrayObject Produce(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage = Usage::Static)
-		{
-			return std::make_shared<AbstractVertexArrayObject>(vertices, indices, layout, usage);
-		}
-	};
+	typedef Factory<AbstractVertexArrayObject> VAOFactory;
+
+	// Object manager for managing said shared pointers
+	typedef ObjectManager<AbstractVertexArrayObject> VAOManager;
 
 }

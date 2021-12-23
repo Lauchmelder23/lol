@@ -61,5 +61,4 @@ namespace lol
 			index++;
 		}
 	}
-
 }
