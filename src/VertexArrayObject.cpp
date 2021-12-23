@@ -6,14 +6,14 @@
 namespace lol
 {
 
-	AbstractVertexArrayObject::~AbstractVertexArrayObject()
+	UniqueVertexArrayObject::~UniqueVertexArrayObject()
 	{
 		glDeleteBuffers(1, &ebo);
 		glDeleteBuffers(1, &vbo);
 		glDeleteVertexArrays(1, &vao);
 	}
 
-	void AbstractVertexArrayObject::Render(GLenum mode)
+	void UniqueVertexArrayObject::Render(GLenum mode)
 	{
 		assert(vao != 0);
 
@@ -22,7 +22,7 @@ namespace lol
 		glDrawElements(mode, indexCount, GL_UNSIGNED_INT, 0);
 	}
 
-	AbstractVertexArrayObject::AbstractVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage) :
+	UniqueVertexArrayObject::UniqueVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage) :
 		vao(0), vbo(0), ebo(0), indexCount(indices.size())
 	{
 		glGenVertexArrays(1, &vao);

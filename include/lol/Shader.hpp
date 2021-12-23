@@ -7,19 +7,23 @@
 #include <glm/glm.hpp>
 
 #include <lol/util/NonCopyable.hpp>
-#include <lol/util/Factory.hpp>
 #include <lol/util/ObjectManager.hpp>
 
 namespace lol
 {
+	class UniqueShader;
+	typedef std::shared_ptr<UniqueShader> Shader;
 
-	class AbstractShader : public NonCopyable
+	class UniqueShader : public NonCopyable
 	{
-		PRODUCT(AbstractShader);
-
 	public:
-		AbstractShader(const std::string& vertexShader, const std::string& fragmentShader);
-		~AbstractShader();
+		UniqueShader(const std::string& vertexShader, const std::string& fragmentShader);
+		~UniqueShader();
+
+		inline static Shader Share(const std::string& vertexShader, const std::string& fragmentShader)
+		{
+			return std::make_shared<UniqueShader>(vertexShader, fragmentShader);
+		}
 
 		inline bool Good() { return id != 0; }
 		void Use();
@@ -33,7 +37,5 @@ namespace lol
 		bool recording = false;
 	};
 
-	typedef std::shared_ptr<AbstractShader> Shader;
-	typedef Factory<AbstractShader> ShaderFactory;
-	typedef ObjectManager<AbstractShader> ShaderManager;
+	typedef ObjectManager<Shader> ShaderManager;
 }

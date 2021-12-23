@@ -4,7 +4,8 @@
 
 namespace lol
 {
-	Texture2D::Texture2D()
+	UniqueTexture::UniqueTexture() :
+		textureID(0)
 	{
 		
 	}

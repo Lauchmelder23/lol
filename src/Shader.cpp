@@ -11,7 +11,7 @@ inline
 namespace lol
 {
 
-	AbstractShader::AbstractShader(const std::string& vertexShader, const std::string& fragmentShader) :
+	UniqueShader::UniqueShader(const std::string& vertexShader, const std::string& fragmentShader) :
 		id(0)
 	{
 		GLint success;
@@ -71,17 +71,17 @@ namespace lol
 		glDeleteShader(vertexShaderID);
 	}
 
-	AbstractShader::~AbstractShader()
+	UniqueShader::~UniqueShader()
 	{
 		glDeleteProgram(id);
 	}
 
-	void AbstractShader::Use()
+	void UniqueShader::Use()
 	{
 		glUseProgram(id);
 	}
 
-	void AbstractShader::SetUniform(const std::string& name, const glm::mat4& value)
+	void UniqueShader::SetUniform(const std::string& name, const glm::mat4& value)
 	{
 		GLint location = glGetUniformLocation(id, name.c_str());
 		if (location == -1)
@@ -90,7 +90,7 @@ namespace lol
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
 	}
 
-	void AbstractShader::SetUniform(const std::string& name, const glm::vec4& value)
+	void UniqueShader::SetUniform(const std::string& name, const glm::vec4& value)
 	{
 		GLint location = glGetUniformLocation(id, name.c_str());
 		if (location == -1)

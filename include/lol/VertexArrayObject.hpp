@@ -4,7 +4,6 @@
 #include <memory>
 
 #include <lol/util/NonCopyable.hpp>
-#include <lol/util/Factory.hpp>
 #include <lol/util/ObjectManager.hpp>
 
 namespace lol
@@ -31,36 +30,33 @@ namespace lol
 		Static, Stream, Dynamic
 	};
 
-	// VAO structure that sets up the buffers and deletes them at the end of the lifecycle
-	class AbstractVertexArrayObject : 
-		public NonCopyable
-	{
-		PRODUCT(AbstractVertexArrayObject);
+	class UniqueVertexArrayObject;
+	// You cannot actually create this VAO, you are forced to use a shared pointer
+	// so the buffers dont get accidentally deleted while another obejct is potentially still using it.
+	// I find this to be very important since VAOs are supposed to be shared between copies of objects
+	// if they have the same model.
+	typedef std::shared_ptr<UniqueVertexArrayObject> VertexArrayObject;
 
+	// VAO structure that sets up the buffers and deletes them at the end of the lifecycle
+	class UniqueVertexArrayObject : public NonCopyable
+	{
 	public:
-		AbstractVertexArrayObject() = delete;
-		~AbstractVertexArrayObject();
+		UniqueVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage = Usage::Static);
+		~UniqueVertexArrayObject();
+
+		inline static VertexArrayObject Share(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage = Usage::Static)
+		{
+			return std::make_shared<UniqueVertexArrayObject>(vertices, indices, layout, usage);
+		}
 
 		void Render(unsigned int mode = 4);
-
-	private:
-		AbstractVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage = Usage::Static);
 
 	private:
 		unsigned int vao, vbo, ebo;
 		size_t indexCount;
 	};
 
-	// You cannot actually create this VAO, you are forced to use a shared pointer
-	// so the buffers dont get accidentally deleted while another obejct is potentially still using it.
-	// I find this to be very important since VAOs are supposed to be shared between copies of objects
-	// if they have the same model.
-	typedef std::shared_ptr<AbstractVertexArrayObject> VertexArrayObject;
-
-	// Factory for creating said shared pointers.
-	typedef Factory<AbstractVertexArrayObject> VAOFactory;
-
 	// Object manager for managing said shared pointers
-	typedef ObjectManager<AbstractVertexArrayObject> VAOManager;
+	typedef ObjectManager<VertexArrayObject> VAOManager;
 
 }
