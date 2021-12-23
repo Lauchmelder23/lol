@@ -1,8 +1,9 @@
 #pragma once
 
 #include <glad/glad.h>
-#include "VertexArrayObject.hpp"
-#include "Shader.hpp"
+
+#include <lol/NonCopyable.hpp>
+#include <lol/Shader.hpp>
 
 namespace lol
 {
@@ -23,9 +24,6 @@ namespace lol
 	class Drawable
 	{
 	public:
-		Drawable(const Drawable& other) = delete;
-		void operator=(const Drawable& other) = delete;
-
 		virtual void PreRender(const CameraBase& camera) const { };
 		void Draw(const CameraBase& camera) const;
 		void SetPrimitiveType(PrimitiveType type);

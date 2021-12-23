@@ -6,16 +6,17 @@
 
 #include <glm/glm.hpp>
 
+#include <lol/NonCopyable.hpp>
+
 namespace lol
 {
 
-	class AbstractShader
+	class AbstractShader : public NonCopyable
 	{
 		friend class ShaderFactory;
 
 	public:
 		AbstractShader(const std::string& vertexShader, const std::string& fragmentShader);
-		AbstractShader(const AbstractShader& other) = delete;
 		~AbstractShader();
 
 		inline bool Good() { return id != 0; }

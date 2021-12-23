@@ -18,7 +18,7 @@ namespace lol
 	 * exist.
 	 */
 	template<typename Type>
-	class ObjectManager
+	class ObjectManager : public NonCopyable
 	{
 	public:
 		static ObjectManager<Type>& GetInstance()
@@ -26,10 +26,6 @@ namespace lol
 			static ObjectManager<Type> instance;
 			return instance;
 		}
-
-	public:
-		ObjectManager(const ObjectManager<Type>&) = delete;
-		void operator=(const ObjectManager<Type>&) = delete;
 
 		/**
 		 * Add new (existing) object to manager

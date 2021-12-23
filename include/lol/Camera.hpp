@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "Transformable.hpp"
-#include "Drawable.hpp"
+#include <lol/Transformable.hpp>
+#include <lol/Drawable.hpp>
 
 namespace lol
 {

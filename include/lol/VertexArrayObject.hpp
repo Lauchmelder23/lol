@@ -3,6 +3,8 @@
 #include <vector>
 #include <memory>
 
+#include <lol/NonCopyable.hpp>
+
 namespace lol
 {
 
@@ -13,7 +15,7 @@ namespace lol
 		unsigned int	type;
 		bool			normalized;
 		unsigned int	stride;
-		const void* pointer;
+		const void*		pointer;
 	};
 
 	// Useful abbreviations
@@ -28,7 +30,7 @@ namespace lol
 	};
 
 	// VAO structure that sets up the buffers and deletes them at the end of the lifecycle
-	class AbstractVertexArrayObject
+	class AbstractVertexArrayObject : public NonCopyable
 	{
 		friend class VAOFactory;
 
