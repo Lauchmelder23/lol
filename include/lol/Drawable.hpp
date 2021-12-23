@@ -2,8 +2,8 @@
 
 #include <glad/glad.h>
 
-#include <lol/NonCopyable.hpp>
 #include <lol/Shader.hpp>
+#include <lol/VertexArrayObject.hpp>
 
 namespace lol
 {
