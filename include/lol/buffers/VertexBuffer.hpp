@@ -35,7 +35,7 @@ namespace lol
 	class VertexBuffer : public Buffer
 	{
 	public:
-		VertexBuffer(size_t size, float* data, Usage usage = Usage::StaticDraw);
+		VertexBuffer(size_t size, const std::vector<float>& data, Usage usage = Usage::StaticDraw);
 
 		inline void SetLayout(const BufferLayout& layout) { this->layout = layout; };
 		inline const BufferLayout& GetLayout() { return layout; }
