@@ -18,6 +18,8 @@ namespace lol
 
 		SetVertexBuffer(vertexBuffer);
 		SetElementBuffer(elementBuffer);
+
+		glBindVertexArray(0);
 	}
 	VertexArray::~VertexArray()
 	{
