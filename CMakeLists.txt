@@ -19,11 +19,16 @@ add_library(lol STATIC
 	"src/Shader.cpp"
 	"src/VertexArrayObject.cpp"
 	"vendor/glad/src/glad.c"
- "include/lol/Texture.hpp" "src/Texture.cpp"       "include/lol/util/Enums.hpp"  "include/lol/Buffer.hpp" "src/Buffer.cpp" "include/lol/buffers/VertexBuffer.hpp" "src/buffers/VertexBuffer.cpp" "include/lol/buffers/ElementBuffer.hpp" "src/buffers/ElementBuffer.cpp")
+	"src/Texture.cpp"  
+	"src/Buffer.cpp" 
+	"src/buffers/VertexBuffer.cpp" 
+	"src/buffers/ElementBuffer.cpp"
+	"src/Image.cpp")
 
 target_include_directories(lol PUBLIC 
 	${GLM_INCLUDE_DIRS}
 	vendor/glad/include
+	vendor/stbi
 	include 
 )
 

@@ -42,7 +42,7 @@ namespace lol
 		case Type::Fixed:			return sizeof(GLfixed);
 
 		default:
-			assert(false && "lol::SizeOf did not implement every datatype");
+			assert(false && "lol::SizeOf(Type) did not implement every datatype");
 			return 0;
 		}
 	}
@@ -178,4 +178,135 @@ namespace lol
 		WriteOnly = GL_WRITE_ONLY,
 		ReadWrite = GL_READ_WRITE
 	};
+
+	/**
+	 * @brief OpenGL internal texture formats
+	 */
+	enum class TextureFormat : GLenum
+	{
+		DepthComponent	= GL_DEPTH_COMPONENT,
+		DepthStencil	= GL_DEPTH_STENCIL,
+		R				= GL_RED,
+		RG				= GL_RG,
+		RGB				= GL_RGB,
+		RGBA			= GL_RGBA,
+
+		R8				= GL_R8,			R8S		= GL_R8_SNORM,	R16			= GL_R16,			R16S			= GL_R16_SNORM,
+		RG8				= GL_RG8,			RG8S	= GL_RG8_SNORM, RG16		= GL_RG16,			RG16S			= GL_RG16_SNORM,
+		R3G3B2			= GL_R3_G3_B2,		RGB4	= GL_RGB4,		RGB5		= GL_RGB5,			RGB8			= GL_RGB8,
+		RGB8S			= GL_RGB8_SNORM,	RGB10	= GL_RGB10,		RGB12		= GL_RGB12,			RGB16S			= GL_RGB16_SNORM,
+		RGBA2			= GL_RGBA2,			RGBA4	= GL_RGBA4,		RGB5A1		= GL_RGB5_A1,		RGBA8			= GL_RGBA8,
+		RGBA8S			= GL_RGBA8_SNORM,	RGB10A2 = GL_RGB10_A2,	RGB10A2UI	= GL_RGB10_A2UI,	RGBA12			= GL_RGBA12,
+		RGBA16			= GL_RGBA16,		SRGB8	= GL_SRGB8,		SRGB8A8		= GL_SRGB8_ALPHA8,	R16F			= GL_R16F,
+		RG16F			= GL_RG16F,			RGB16F	= GL_RGB16F,	RGBA16F		= GL_RGBA16F,		R32F			= GL_R32F,
+		RG32F			= GL_RG32F,			RGB32F	= GL_RGB32F,	RGBA32F		= GL_RGBA32F,		R11FG11FB10F	= GL_R11F_G11F_B10F,
+		RGB9E5			= GL_RGB9_E5,		R8I		= GL_R8I,		R8UI		= GL_R8UI,			R16I			= GL_R16I,
+		R16UI			= GL_R16UI,			R32I	= GL_R32I,		R32UI		= GL_R32UI,			RG8I			= GL_RG8I,
+		RG8UI			= GL_RG8UI,			RG16I	= GL_RG16I,		RG16UI		= GL_RG16UI,		RG32I			= GL_RG32I,
+		RG32UI			= GL_RG32UI,		RGB8I	= GL_RGB8I,		RGB8UI		= GL_RGB8UI,		RGB16I			= GL_RGB16I,
+		RGB16UI			= GL_RGB16UI,		RGB32I	= GL_RGB32I,	RGB32UI		= GL_RGB32UI,		RGBA8I			= GL_RGBA8I,
+		RGBA8UI			= GL_RGBA8UI,		RGBA16I	= GL_RGBA16I,	RGBA16UI	= GL_RGBA16UI,		RGBA32I			= GL_RGBA32I,
+		RGBA32UI		= GL_RGBA32UI,
+
+		CR				= GL_COMPRESSED_RED,
+		CRG				= GL_COMPRESSED_RG,
+		CRGB			= GL_COMPRESSED_RGB,
+		CRGBA			= GL_COMPRESSED_RGBA,
+		CSRGB			= GL_COMPRESSED_SRGB,
+		CSRGBA			= GL_COMPRESSED_SRGB_ALPHA,
+		CR_RGTC1		= GL_COMPRESSED_RED_RGTC1,
+		CRS_RGTC1		= GL_COMPRESSED_SIGNED_RED_RGTC1,
+		CRG_RGTC2		= GL_COMPRESSED_RG_RGTC2,
+		CRGS_RGTC2		= GL_COMPRESSED_SIGNED_RG_RGTC2,
+		CRGBA_BPTC		= GL_COMPRESSED_RGBA_BPTC_UNORM,
+		CSRGBA_BPTC		= GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM,
+		CRGB_BPTC_SF	= GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT,
+		CRGB_BPTC_UF	= GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT,
+	};
+
+	/**
+	 * @brief OpenGL internal pixel formats
+	 */
+	enum class PixelFormat : GLenum
+	{
+		R				= GL_RED,
+		RG				= GL_RG,
+		RGB				= GL_RGB,
+		BGR				= GL_BGR,
+		RGBA			= GL_RGBA,
+		BGRA			= GL_BGRA,
+		RI				= GL_RED_INTEGER,
+		RGI				= GL_RG_INTEGER,
+		RGBI			= GL_RGB_INTEGER,
+		BGRI			= GL_BGR_INTEGER,
+		RGBAI			= GL_RGBA_INTEGER,
+		BGRAI			= GL_BGRA_INTEGER,
+		StencilIndex	= GL_STENCIL_INDEX,
+		DepthComponent	= GL_DEPTH_COMPONENT,
+		DepthStencil	= GL_DEPTH_STENCIL,
+	};
+
+	/**
+	 * @brief OpenGL Pixel datatypes
+	 */
+	enum class PixelType : GLenum
+	{
+		UByte		= GL_UNSIGNED_BYTE,				Byte			= GL_BYTE,
+		UShort		= GL_UNSIGNED_SHORT,			Short			= GL_SHORT,
+		UInt		= GL_UNSIGNED_INT,				Int				= GL_INT,
+		Float		= GL_FLOAT,
+
+		UByte332	= GL_UNSIGNED_BYTE_3_3_2,		UByte233Rev		= GL_UNSIGNED_BYTE_2_3_3_REV,
+		UShort565	= GL_UNSIGNED_SHORT_5_6_5,		UShort565Rev	= GL_UNSIGNED_SHORT_5_6_5_REV,
+		UShort4444	= GL_UNSIGNED_SHORT_4_4_4_4,	UShort4444Rev	= GL_UNSIGNED_SHORT_4_4_4_4_REV,
+		UShort5551	= GL_UNSIGNED_SHORT_5_5_5_1,	UShort1555Rev	= GL_UNSIGNED_SHORT_1_5_5_5_REV,
+		UInt8888	= GL_UNSIGNED_INT_8_8_8_8,		UInt8888Rev		= GL_UNSIGNED_INT_8_8_8_8_REV,
+		UInt1010102	= GL_UNSIGNED_INT_10_10_10_2,	UInt1010102Rev	= GL_UNSIGNED_INT_2_10_10_10_REV
+	};
+
+	/**
+	 * @brief Get size of OpenGL datatype in Bytes
+	 */
+	constexpr size_t SizeOf(PixelType type)
+	{
+		switch (type)
+		{
+		case PixelType::UByte332:
+		case PixelType::UByte233Rev:
+		case PixelType::Byte:			
+			return sizeof(GLbyte);
+
+		case PixelType::UByte:			
+			return sizeof(GLubyte);
+
+		case PixelType::Short:
+			return sizeof(GLshort);
+
+		case PixelType::UShort565:
+		case PixelType::UShort565Rev:
+		case PixelType::UShort4444:
+		case PixelType::UShort4444Rev:
+		case PixelType::UShort5551:
+		case PixelType::UShort1555Rev:
+		case PixelType::UShort:
+			return sizeof(GLushort);
+
+		case PixelType::Int:			
+			return sizeof(GLint);
+
+		case PixelType::UInt8888:
+		case PixelType::UInt8888Rev:
+		case PixelType::UInt1010102:
+		case PixelType::UInt1010102Rev:
+		case PixelType::UInt:			
+			return sizeof(GLuint);
+
+		case PixelType::Float:			
+			return sizeof(GLfloat);
+
+		default:
+			assert(false && "lol::SizeOf(PixelType) did not implement every datatype");
+			return 0;
+		}
+	}
 }
