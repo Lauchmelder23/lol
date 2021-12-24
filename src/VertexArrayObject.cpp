@@ -6,59 +6,58 @@
 namespace lol
 {
 
-	UniqueVertexArrayObject::~UniqueVertexArrayObject()
+	VertexArray::VertexArray()
 	{
-		glDeleteBuffers(1, &ebo);
-		glDeleteBuffers(1, &vbo);
-		glDeleteVertexArrays(1, &vao);
+		glGenVertexArrays(1, &id);
 	}
 
-	void UniqueVertexArrayObject::Render(GLenum mode)
+	VertexArray::VertexArray(const std::shared_ptr<VertexBuffer>& vertexBuffer, const std::shared_ptr<ElementBuffer>& elementBuffer) :
+		id(0)
 	{
-		assert(vao != 0);
+		glGenVertexArrays(1, &id);
 
-		glBindVertexArray(vao);
-		// GLenum result = glGetError();
-		glDrawElements(mode, indexCount, GL_UNSIGNED_INT, 0);
+		SetVertexBuffer(vertexBuffer);
+		SetElementBuffer(elementBuffer);
+	}
+	VertexArray::~VertexArray()
+	{
+		glDeleteVertexArrays(1, &id);
 	}
 
-	UniqueVertexArrayObject::UniqueVertexArrayObject(const VertexArray& vertices, const IndexArray& indices, const Layout& layout, Usage usage) :
-		vao(0), vbo(0), ebo(0), indexCount(indices.size())
+	void VertexArray::SetVertexBuffer(const std::shared_ptr<VertexBuffer>& buffer)
 	{
-		glGenVertexArrays(1, &vao);
-		glBindVertexArray(vao);
-		glGenBuffers(1, &vbo);
-		glGenBuffers(1, &ebo);
-
-		// Determing native OpenGL GLenum depending on specified usage
-		GLenum bufferUsage;
-		switch (usage)
-		{
-		case Usage::Static:		bufferUsage = GL_STATIC_DRAW; break;
-		case Usage::Dynamic:	bufferUsage = GL_DYNAMIC_DRAW; break;
-		case Usage::Stream:		bufferUsage = GL_STREAM_DRAW; break;
-
-		default:	// Forgot to add a usage case to this switch
-			assert("Unknown buffer usage" == "");
-			break;
-		}
-
-		// Create VBO
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), (const void*)(vertices.data()), bufferUsage);
-
-		// Create EBO
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), (const void*)(indices.data()), bufferUsage);
+		glBindVertexArray(id);
+		buffer->Bind();
 
 		// Set up pipeline layout
 		unsigned int index = 0;
+		const BufferLayout& layout = buffer->GetLayout();
 		for (const VertexAttribute& attribute : layout)
 		{
-			glVertexAttribPointer(index, attribute.size, attribute.type, attribute.normalized, attribute.stride, attribute.pointer);
 			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(index, attribute.size, NATIVE(attribute.type), attribute.normalized, layout.GetStride(), (void*)(attribute.offset));
 
 			index++;
 		}
+
+		vertexBuffer = buffer;
+	}
+
+	void VertexArray::SetElementBuffer(const std::shared_ptr<ElementBuffer>& buffer)
+	{
+		glBindVertexArray(id);
+		buffer->Bind();
+
+		elementBuffer = buffer;
+	}
+
+	void VertexArray::Bind()
+	{
+		glBindVertexArray(id);
+	}
+
+	void Unbind()
+	{
+		glBindVertexArray(0);
 	}
 }

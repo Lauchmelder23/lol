@@ -17,6 +17,8 @@ namespace lol
 		 */
 		Transformable();
 
+		virtual ~Transformable() {}
+
 		/**
 		 * @brief Get position of the object
 		 * 

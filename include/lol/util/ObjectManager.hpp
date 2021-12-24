@@ -30,7 +30,7 @@ namespace lol
 		/**
 		 * Add new (existing) object to manager
 		 */
-		inline void Register(unsigned int id, Type obj)
+		inline void Register(unsigned int id, const std::shared_ptr<Type>& obj)
 		{
 			objects.insert(std::make_pair(id, obj));
 		}
@@ -46,7 +46,7 @@ namespace lol
 		/**
 		 * Retrieve object from manager
 		 */
-		inline Type Get(unsigned int id)
+		inline std::shared_ptr<Type> Get(unsigned int id)
 		{
 			auto it = objects.find(id);
 
@@ -60,7 +60,7 @@ namespace lol
 		ObjectManager() {}
 
 	private:
-		std::map<unsigned int, Type> objects;
+		std::map<unsigned int, std::shared_ptr<Type>> objects;
 	};
 
 }

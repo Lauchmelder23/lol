@@ -11,13 +11,10 @@
 
 namespace lol
 {
-	class UniqueShader;
-	typedef std::shared_ptr<UniqueShader> Shader;
-
 	/**
 	 * Compiles shaders into a program and manages access to that program
 	 */
-	class UniqueShader : public NonCopyable
+	class Shader : public NonCopyable
 	{
 	public:
 		/**
@@ -26,21 +23,8 @@ namespace lol
 		 * @param vertexShader   Source code of the vertex shader
 		 * @param fragmentShader Source code of the fragment shader
 		 */
-		UniqueShader(const std::string& vertexShader, const std::string& fragmentShader);
-		~UniqueShader();
-
-		/**
-		 * @brief Creates a shareable UniqueShader. Note that they're SHAREable, not COPYable
-		 * 
-		 * @param vertexShader   Source code of the vertex shader
-		 * @param fragmentShader Source code of the fragment shader
-		 * 
-		 * @returns Shared pointer to a UniqueShader
-		 */
-		inline static Shader Share(const std::string& vertexShader, const std::string& fragmentShader)
-		{
-			return std::make_shared<UniqueShader>(vertexShader, fragmentShader);
-		}
+		Shader(const std::string& vertexShader, const std::string& fragmentShader);
+		~Shader();
 
 		/**
 		 * @brief Status of the program creation
@@ -52,7 +36,8 @@ namespace lol
 		/**
 		 * @brief Bind this shader program
 		 */
-		void Use();
+		void Bind();
+		void Unbind();
 
 		/**
 		 * Set a 4x4 matrix uniform
@@ -72,8 +57,6 @@ namespace lol
 
 	private:
 		unsigned int id;
-
-		bool recording = false;
 	};
 
 	typedef ObjectManager<Shader> ShaderManager;

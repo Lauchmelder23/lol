@@ -5,6 +5,8 @@
 
 namespace lol
 {
+
+
 	class UniqueTexture;
 	typedef std::shared_ptr<UniqueTexture> Texture;
 
@@ -12,6 +14,7 @@ namespace lol
 	{
 	public:
 		UniqueTexture();
+		~UniqueTexture();
 
 		inline static Texture Share()
 		{

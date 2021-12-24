@@ -5,12 +5,14 @@ namespace lol
 
 	void Drawable::Draw(const CameraBase& camera) const
 	{
-		shader->Use();
+		shader->Bind();
+		vao->Bind();
 		PreRender(camera);
-		vao->Render(static_cast<unsigned int>(type));
+
+		glDrawElements(NATIVE(type), vao->GetIndexCount(), GL_UNSIGNED_INT, nullptr);
 	}
 
-	void Drawable::SetPrimitiveType(PrimitiveType type)
+	void Drawable::SetDrawMode(DrawMode type)
 	{
 		this->type = type;
 	}

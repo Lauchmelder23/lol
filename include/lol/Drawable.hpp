@@ -10,23 +10,14 @@ namespace lol
 
 	class CameraBase;
 
-	enum class PrimitiveType
-	{
-		Lines = GL_LINES,
-		LineStrip = GL_LINE_STRIP,
-		LineLoop = GL_LINE_LOOP,
-
-		Triangles = GL_TRIANGLES,
-		TriangleStrip = GL_TRIANGLE_STRIP,
-		TriangleFan = GL_TRIANGLE_FAN
-	};
-
 	/**
 	 * A class that can be displayed on a screen.
 	 */
 	class Drawable
 	{
 	public:
+		virtual ~Drawable() {}
+
 		/**
 		 * @brief Called immediately after the shader is bound, and before the VAO is drawn.
 		 * 
@@ -44,16 +35,16 @@ namespace lol
 		/**
 		 * @brief The VAO can be rendered as a mesh, a set of lines, loops, strips etc
 		 */
-		void SetPrimitiveType(PrimitiveType type);
+		void SetDrawMode(DrawMode type);
 
 	protected:
 		Drawable() {}
 
 	protected:
-		VertexArrayObject vao;
-		Shader shader;
+		std::shared_ptr<VertexArray> vao;
+		std::shared_ptr<Shader> shader;
 
-		PrimitiveType type = PrimitiveType::Triangles;
+		DrawMode type = DrawMode::Triangles;
 	};
 
 }
