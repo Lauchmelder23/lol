@@ -54,7 +54,7 @@ namespace lol
 		 * 
 		 * @param drawable A Drawable that should be rendered through this camera
 		 */
-		inline void Draw(const Drawable& drawable) const
+		inline void Draw(Drawable& drawable) const
 		{
 			drawable.Draw(*this);
 		}

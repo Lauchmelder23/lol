@@ -40,6 +40,14 @@ namespace lol
 		void Unbind();
 
 		/**
+		 * Set a float uniform
+		 *
+		 * @param name  Name of the uniform
+		 * @param value Value of the uniform
+		 */
+		void SetUniform(const std::string& name, float value);
+
+		/**
 		 * Set a 4x4 matrix uniform
 		 * 
 		 * @param name  Name of the uniform

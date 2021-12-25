@@ -86,6 +86,15 @@ namespace lol
 		glUseProgram(0);
 	}
 
+	void Shader::SetUniform(const std::string& name, float value)
+	{
+		GLint location = glGetUniformLocation(id, name.c_str());
+		if (location == -1)
+			return;
+
+		glUniform1f(location, value);
+	}
+
 	void Shader::SetUniform(const std::string& name, const glm::mat4& value)
 	{
 		GLint location = glGetUniformLocation(id, name.c_str());

@@ -23,14 +23,14 @@ namespace lol
 		 * 
 		 * @param camera The camera with which this object is rendered.
 		 */
-		virtual void PreRender(const CameraBase& camera) const { };
+		virtual void PreRender(const CameraBase& camera) { };
 
 		/**
 		 * @brief Bind the shader and draw the VAO
 		 * 
 		 * @param camera The camera with which this object is rendered.
 		 */
-		void Draw(const CameraBase& camera) const;
+		void Draw(const CameraBase& camera);
 
 		/**
 		 * @brief The VAO can be rendered as a mesh, a set of lines, loops, strips etc

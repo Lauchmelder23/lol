@@ -3,7 +3,7 @@
 namespace lol
 {
 
-	void Drawable::Draw(const CameraBase& camera) const
+	void Drawable::Draw(const CameraBase& camera)
 	{
 		shader->Bind();
 		vao->Bind();
