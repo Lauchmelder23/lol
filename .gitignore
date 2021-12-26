@@ -1,5 +1,6 @@
 .vs/
 [Oo]ut/
 [Bb]uild/
+[Dd]oc/
 
 *.json
