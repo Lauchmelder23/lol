@@ -56,13 +56,18 @@ namespace lol
 			return it->second;
 		}
 
-		inline void Cleanup()
+		inline void CleanupUnused()
 		{
 			for(auto& [key, val] : objects)
 			{
-				if (val.use_count() < 3)	// I hope I don't forget about this if I ever go multithreaded
+				if (val.use_count() < 3)
 					objects.erase(key);
 			}
+		}
+
+		inline void Cleanup()
+		{
+			objects.clear();
 		}
 
 		inline void Return(unsigned int id)
