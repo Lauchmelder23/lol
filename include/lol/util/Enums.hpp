@@ -13,15 +13,16 @@ namespace lol
 	 */
 	enum class Type : GLenum
 	{
-		Byte			= GL_BYTE,
-		UByte			= GL_UNSIGNED_BYTE,
-		Short			= GL_UNSIGNED_SHORT,
-		Int				= GL_INT,
-		UInt			= GL_UNSIGNED_INT,
-		Half			= GL_HALF_FLOAT,
-		Float			= GL_FLOAT,
-		Double			= GL_DOUBLE,
-		Fixed			= GL_FIXED
+		Byte			= GL_BYTE,				///< Signed 8 bit integer
+		UByte			= GL_UNSIGNED_BYTE,		///< Unsigned 8 bit integer
+		Short			= GL_SHORT,				///< Signed 16 bit integer
+		UShort			= GL_UNSIGNED_SHORT,	///< Unsigned 16 bit integer
+		Int				= GL_INT,				///< Signed 32 bit integer
+		UInt			= GL_UNSIGNED_INT,		///< Unsigned 32 bit integer
+		Half			= GL_HALF_FLOAT,		///< 16 bit half-precision floating point number
+		Float			= GL_FLOAT,				///< 32 bit single-precision floating point number
+		Double			= GL_DOUBLE,			///< 64 bit double-precision floating point number
+		Fixed			= GL_FIXED				///< 32 bit 16.16 fixed decimal number
 	};
 
 	/**
@@ -52,60 +53,124 @@ namespace lol
 	 */
 	enum class GLSLType : GLenum
 	{
-		Float	= GL_FLOAT,			Float2	= GL_FLOAT_VEC2,				Float3	= GL_FLOAT_VEC3,		Float4	= GL_FLOAT_VEC4,
-		Double	= GL_DOUBLE,		Double2	= GL_DOUBLE_VEC2,				Double3 = GL_DOUBLE_VEC3,		Double4 = GL_DOUBLE_VEC4,
-		Int		= GL_INT,			Int2	= GL_INT_VEC2,					Int3	= GL_INT_VEC3,			Int4	= GL_INT_VEC4,
-		UInt	= GL_UNSIGNED_INT,	UInt2	= GL_UNSIGNED_INT_VEC2,			UInt3	= GL_UNSIGNED_INT_VEC3, UInt4	= GL_UNSIGNED_INT_VEC4,
-		Bool	= GL_BOOL,			Bool2	= GL_BOOL_VEC2,					Bool3	= GL_BOOL_VEC3,			Bool4	= GL_BOOL_VEC4,
+		Float					= GL_FLOAT,											///< `float`
+		Float2					= GL_FLOAT_VEC2,									///< `vec2`	
+		Float3					= GL_FLOAT_VEC3,									///< `vec3`
+		Float4					= GL_FLOAT_VEC4,									///< `vec4`
 
-		Mat2	= GL_FLOAT_MAT2,	Mat3	= GL_FLOAT_MAT3,				Mat4	= GL_FLOAT_MAT4,
-		Mat2x3	= GL_FLOAT_MAT2x3,	Mat2x4	= GL_FLOAT_MAT2x4,				Mat3x2	= GL_FLOAT_MAT3x2,		
-		Mat3x4	= GL_FLOAT_MAT3x4,	Mat4x2	= GL_FLOAT_MAT4x2,				Mat4x3	= GL_FLOAT_MAT4x3,
+		Double					= GL_DOUBLE,										///< `double`
+		Double2					= GL_DOUBLE_VEC2,									///< `dvec2`
+		Double3 				= GL_DOUBLE_VEC3,									///< `dvec3`
+		Double4 				= GL_DOUBLE_VEC4,									///< `dvec4`
 
-		DMat2	= GL_DOUBLE_MAT2,	DMat3	= GL_DOUBLE_MAT3,				DMat4	= GL_DOUBLE_MAT4,
-		DMat2x3 = GL_DOUBLE_MAT2x3,	DMat2x4 = GL_DOUBLE_MAT2x4,				DMat3x2	= GL_DOUBLE_MAT3x2,
-		DMat3x4 = GL_DOUBLE_MAT3x4,	DMat4x2 = GL_DOUBLE_MAT4x2,				DMat4x3	= GL_DOUBLE_MAT4x3,
+		Int						= GL_INT,											///< `int`
+		Int2					= GL_INT_VEC2,										///< `ivec2`
+		Int3					= GL_INT_VEC3,										///< `ivec3`
+		Int4					= GL_INT_VEC4,										///< `ivec4`
 
-		Sampler1D				= GL_SAMPLER_1D,							Sampler2D				= GL_SAMPLER_2D,		
-		Sampler3D				= GL_SAMPLER_3D,							SamplerCube				= GL_SAMPLER_CUBE,
-		Sampler1DShadow			= GL_SAMPLER_1D_SHADOW,						Sampler2DShadow			= GL_SAMPLER_2D_SHADOW,
-		Sampler1DArray			= GL_SAMPLER_1D_ARRAY,						Sampler2DArray			= GL_SAMPLER_2D_ARRAY,
-		Sampler1DArrayShadow	= GL_SAMPLER_1D_ARRAY_SHADOW,				Sampler2DArrayShadow	= GL_SAMPLER_2D_ARRAY_SHADOW,
-		Sampler2DMS				= GL_SAMPLER_2D_MULTISAMPLE,				Sampler2DMSArray		= GL_SAMPLER_2D_MULTISAMPLE_ARRAY,
-		SamplerCubeShadow		= GL_SAMPLER_CUBE_SHADOW,					SamplerBuffer			= GL_SAMPLER_BUFFER,
-		Sampler2DRect			= GL_SAMPLER_2D_RECT,						Sampler2DRectShadow		= GL_SAMPLER_2D_RECT_SHADOW,
+		UInt					= GL_UNSIGNED_INT,									///< `uint`
+		UInt2					= GL_UNSIGNED_INT_VEC2,								///< `uvec2`
+		UInt3					= GL_UNSIGNED_INT_VEC3, 							///< `uvec3`
+		UInt4					= GL_UNSIGNED_INT_VEC4,								///< `uvec4`
 
-		ISampler1D				= GL_INT_SAMPLER_1D,						ISampler2D				= GL_INT_SAMPLER_2D,
-		ISampler3D				= GL_INT_SAMPLER_3D,						ISamplerCube			= GL_INT_SAMPLER_CUBE,
-		ISampler1DArray			= GL_INT_SAMPLER_1D_ARRAY,					ISampler2DArray			= GL_INT_SAMPLER_2D_ARRAY,
-		ISampler2DMS			= GL_INT_SAMPLER_2D_MULTISAMPLE,			ISampler2DMSArray		= GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
-		ISamplerBuffer			= GL_INT_SAMPLER_BUFFER,					ISampler2DRect			= GL_INT_SAMPLER_2D_RECT,
+		Bool					= GL_BOOL,											///< `bool`
+		Bool2					= GL_BOOL_VEC2,										///< `bvec2`
+		Bool3					= GL_BOOL_VEC3,										///< `bvec3`
+		Bool4					= GL_BOOL_VEC4,										///< `bvec4`
 
-		USampler1D				= GL_UNSIGNED_INT_SAMPLER_1D,				USampler2D				= GL_UNSIGNED_INT_SAMPLER_2D,
-		USampler3D				= GL_UNSIGNED_INT_SAMPLER_3D,				USamplerCube			= GL_UNSIGNED_INT_SAMPLER_CUBE,
-		USampler1DArray			= GL_UNSIGNED_INT_SAMPLER_1D_ARRAY,			USampler2DArray			= GL_UNSIGNED_INT_SAMPLER_2D_ARRAY,
-		USampler2DMS			= GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE,	USampler2DMSArray		= GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,
-		USamplerBuffer			= GL_UNSIGNED_INT_SAMPLER_BUFFER,			USampler2DRect			= GL_UNSIGNED_INT_SAMPLER_2D_RECT,
+		Mat2					= GL_FLOAT_MAT2,									///< `mat2`
+		Mat3					= GL_FLOAT_MAT3,									///< `mat3`
+		Mat4					= GL_FLOAT_MAT4,									///< `mat4`
+		Mat2x3					= GL_FLOAT_MAT2x3,									///< `mat2x3`
+		Mat2x4					= GL_FLOAT_MAT2x4,									///< `mat2x4`
+		Mat3x2					= GL_FLOAT_MAT3x2,									///< `mat3x2`
+		Mat3x4					= GL_FLOAT_MAT3x4,									///< `mat3x4`
+		Mat4x2					= GL_FLOAT_MAT4x2,									///< `mat4x2`
+		Mat4x3					= GL_FLOAT_MAT4x3,									///< `mat4x3`
 
-		Image1D					= GL_IMAGE_1D,								Image2D					= GL_IMAGE_2D, 
-		Image3D					= GL_IMAGE_3D,								Image2DRect				= GL_IMAGE_2D_RECT, 
-		ImageCube				= GL_IMAGE_CUBE,							ImageBuffer				= GL_IMAGE_BUFFER,
-		Image1DArray			= GL_IMAGE_1D_ARRAY,						Image2DArray			= GL_IMAGE_2D_ARRAY,
-		Image2DMS				= GL_IMAGE_2D_MULTISAMPLE,					Image2DMSArray			= GL_IMAGE_2D_MULTISAMPLE_ARRAY,
+		DMat2					= GL_DOUBLE_MAT2,									///< `dmat2`
+		DMat3					= GL_DOUBLE_MAT3,									///< `dmat3`
+		DMat4					= GL_DOUBLE_MAT4,									///< `dmat4`
+		DMat2x3 				= GL_DOUBLE_MAT2x3,									///< `dmat2x3`
+		DMat2x4 				= GL_DOUBLE_MAT2x4,									///< `dmat2x4`
+		DMat3x2					= GL_DOUBLE_MAT3x2,									///< `dmat3x2`
+		DMat3x4 				= GL_DOUBLE_MAT3x4,									///< `dmat3x4`
+		DMat4x2 				= GL_DOUBLE_MAT4x2,									///< `dmat4x2`
+		DMat4x3					= GL_DOUBLE_MAT4x3,									///< `dmat4x3`
 
-		IImage1D				= GL_INT_IMAGE_1D,							IImage2D				= GL_INT_IMAGE_2D,
-		IImage3D				= GL_INT_IMAGE_3D,							IImage2DRect			= GL_INT_IMAGE_2D_RECT,
-		IImageCube				= GL_INT_IMAGE_CUBE,						IImageBuffer			= GL_INT_IMAGE_BUFFER,
-		IImage1DArray			= GL_INT_IMAGE_1D_ARRAY,					IImage2DArray			= GL_INT_IMAGE_2D_ARRAY,
-		IImage2DMS				= GL_INT_IMAGE_2D_MULTISAMPLE,				IImage2DMSArray			= GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
+		Sampler1D				= GL_SAMPLER_1D,									///< `sampler1D`			
+		Sampler2D				= GL_SAMPLER_2D,									///< `sampler2D`			
+		Sampler3D				= GL_SAMPLER_3D,									///< `sampler3D`			
+		SamplerCube				= GL_SAMPLER_CUBE,									///< `samplerCube`			
+		Sampler1DArray			= GL_SAMPLER_1D_ARRAY,								///< `sampler1DArray`		
+		Sampler2DArray			= GL_SAMPLER_2D_ARRAY,								///< `sampler2DArray`		
+		Sampler2DMS				= GL_SAMPLER_2D_MULTISAMPLE,						///< `sampler2DMS`			
+		Sampler2DMSArray		= GL_SAMPLER_2D_MULTISAMPLE_ARRAY,					///< `sampler2DMSArray`		
+		SamplerBuffer			= GL_SAMPLER_BUFFER,								///< `samplerBuffer`		
+		Sampler2DRect			= GL_SAMPLER_2D_RECT,								///< `sampler2DRect`		
+		Sampler1DShadow			= GL_SAMPLER_1D_SHADOW,								///< `sampler1DShadow`		
+		Sampler2DShadow			= GL_SAMPLER_2D_SHADOW,								///< `sampler2DShadow`		
+		Sampler1DArrayShadow	= GL_SAMPLER_1D_ARRAY_SHADOW,						///< `sampler1DArrayShadow`	
+		Sampler2DArrayShadow	= GL_SAMPLER_2D_ARRAY_SHADOW,						///< `sampler2DArrayShadow`	
+		SamplerCubeShadow		= GL_SAMPLER_CUBE_SHADOW,							///< `samplerCubeShadow`	
+		Sampler2DRectShadow		= GL_SAMPLER_2D_RECT_SHADOW,						///< `sampler2DRectShadow`	
 
-		UImage1D				= GL_UNSIGNED_INT_IMAGE_1D,					UImage2D				= GL_UNSIGNED_INT_IMAGE_2D,
-		UImage3D				= GL_UNSIGNED_INT_IMAGE_3D,					UImage2DRect			= GL_UNSIGNED_INT_IMAGE_2D_RECT,
-		UImageCube				= GL_UNSIGNED_INT_IMAGE_CUBE,				UImageBuffer			= GL_UNSIGNED_INT_IMAGE_BUFFER,
-		UImage1DArray			= GL_UNSIGNED_INT_IMAGE_1D_ARRAY,			UImage2DArray			= GL_UNSIGNED_INT_IMAGE_2D_ARRAY,
-		UImage2DMS				= GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE,		UImage2DMSArray			= GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY,
+		ISampler1D				= GL_INT_SAMPLER_1D,								///< `isampler1D`			
+		ISampler2D				= GL_INT_SAMPLER_2D,								///< `isampler2D`			
+		ISampler3D				= GL_INT_SAMPLER_3D,								///< `isampler3D`			
+		ISamplerCube			= GL_INT_SAMPLER_CUBE,								///< `isamplerCube`			
+		ISampler1DArray			= GL_INT_SAMPLER_1D_ARRAY,							///< `isampler1DArray`		
+		ISampler2DArray			= GL_INT_SAMPLER_2D_ARRAY,							///< `isampler2DArray`		
+		ISampler2DMS			= GL_INT_SAMPLER_2D_MULTISAMPLE,					///< `isampler2DMS`			
+		ISampler2DMSArray		= GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,				///< `isampler2DMSArray`	
+		ISamplerBuffer			= GL_INT_SAMPLER_BUFFER,							///< `isamplerBuffer`		
+		ISampler2DRect			= GL_INT_SAMPLER_2D_RECT,							///< `isampler2DRect`		
+		
+		USampler1D				= GL_UNSIGNED_INT_SAMPLER_1D,						///< `usampler1D`
+		USampler2D				= GL_UNSIGNED_INT_SAMPLER_2D,						///< `usampler2D`
+		USampler3D				= GL_UNSIGNED_INT_SAMPLER_3D,						///< `usampler3D`
+		USamplerCube			= GL_UNSIGNED_INT_SAMPLER_CUBE,						///< `usamplerCube`
+		USampler1DArray			= GL_UNSIGNED_INT_SAMPLER_1D_ARRAY,					///< `usampler1DArray`
+		USampler2DArray			= GL_UNSIGNED_INT_SAMPLER_2D_ARRAY,					///< `usampler2DArray`
+		USampler2DMS			= GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE,			///< `usampler2DMS`
+		USampler2DMSArray		= GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY,		///< `usampler2DMSArray`
+		USamplerBuffer			= GL_UNSIGNED_INT_SAMPLER_BUFFER,					///< `usamplerBuffer`
+		USampler2DRect			= GL_UNSIGNED_INT_SAMPLER_2D_RECT,					///< `usampler2DRect`
+		
+		Image1D					= GL_IMAGE_1D,										///< `image1D`		
+		Image2D					= GL_IMAGE_2D, 										///< `image2D`		
+		Image3D					= GL_IMAGE_3D,										///< `image3D`		
+		ImageCube				= GL_IMAGE_CUBE,									///< `imageCube`	
+		ImageBuffer				= GL_IMAGE_BUFFER,									///< `imageBuffer`	
+		Image1DArray			= GL_IMAGE_1D_ARRAY,								///< `image1DArray`		
+		Image2DArray			= GL_IMAGE_2D_ARRAY,								///< `image2DArray`
+		Image2DMS				= GL_IMAGE_2D_MULTISAMPLE,							///< `image2DMS`	
+		Image2DMSArray			= GL_IMAGE_2D_MULTISAMPLE_ARRAY,					///< `image2DMSArray`	
+		Image2DRect				= GL_IMAGE_2D_RECT, 								///< `image2DRect`		
 
-		AtomicUnit = GL_UNSIGNED_INT_ATOMIC_COUNTER
+		IImage1D				= GL_INT_IMAGE_1D,									///< `iimage1D`		
+		IImage2D				= GL_INT_IMAGE_2D,									///< `iimage2D`		
+		IImage3D				= GL_INT_IMAGE_3D,									///< `iimage3D`		
+		IImage2DRect			= GL_INT_IMAGE_2D_RECT,								///< `iimageCube`	
+		IImageCube				= GL_INT_IMAGE_CUBE,								///< `iimageBuffer`	
+		IImageBuffer			= GL_INT_IMAGE_BUFFER,								///< `iimage1DArray`		
+		IImage1DArray			= GL_INT_IMAGE_1D_ARRAY,							///< `iimage2DArray`
+		IImage2DArray			= GL_INT_IMAGE_2D_ARRAY,							///< `iimage2DMS`	
+		IImage2DMS				= GL_INT_IMAGE_2D_MULTISAMPLE,						///< `iimage2DMSArray`	
+		IImage2DMSArray			= GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY,				///< `iimage2DRect`		
+
+		UImage1D				= GL_UNSIGNED_INT_IMAGE_1D,							///< `uimage1D`		
+		UImage2D				= GL_UNSIGNED_INT_IMAGE_2D,							///< `uimage2D`		
+		UImage3D				= GL_UNSIGNED_INT_IMAGE_3D,							///< `uimage3D`		
+		UImage2DRect			= GL_UNSIGNED_INT_IMAGE_2D_RECT,					///< `uimageCube`	
+		UImageCube				= GL_UNSIGNED_INT_IMAGE_CUBE,						///< `uimageBuffer`	
+		UImageBuffer			= GL_UNSIGNED_INT_IMAGE_BUFFER,						///< `uimage1DArray`		
+		UImage1DArray			= GL_UNSIGNED_INT_IMAGE_1D_ARRAY,					///< `uimage2DArray`
+		UImage2DArray			= GL_UNSIGNED_INT_IMAGE_2D_ARRAY,					///< `uimage2DMS`	
+		UImage2DMS				= GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE,				///< `uimage2DMSArray`	
+		UImage2DMSArray			= GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY,		///< `uimage2DRect`		
+
+		AtomicUnit 				= GL_UNSIGNED_INT_ATOMIC_COUNTER					///< `atomic_uint`
 	};
 
 	/**
@@ -113,20 +178,20 @@ namespace lol
 	 */
 	enum class BufferType : GLenum
 	{
-		Array				= GL_ARRAY_BUFFER,
-		AtomicCounter		= GL_ATOMIC_COUNTER_BUFFER,
-		CopyRead			= GL_COPY_READ_BUFFER,
-		CopyWrite			= GL_COPY_WRITE_BUFFER,
-		DispatchIndirect	= GL_DISPATCH_INDIRECT_BUFFER,
-		DrawIndirect		= GL_DRAW_INDIRECT_BUFFER,
-		ElementArray		= GL_ELEMENT_ARRAY_BUFFER,
-		PixelPack			= GL_PIXEL_PACK_BUFFER,
-		PixelUnpack			= GL_PIXEL_UNPACK_BUFFER,
-		Query				= GL_QUERY_BUFFER,
-		ShaderStorage		= GL_SHADER_STORAGE_BUFFER,
-		Texture				= GL_TEXTURE_BUFFER,
-		TransformFeedback	= GL_TRANSFORM_FEEDBACK_BUFFER,
-		Uniform				= GL_UNIFORM_BUFFER
+		Array				= GL_ARRAY_BUFFER,						///< Vertex attributes
+		AtomicCounter		= GL_ATOMIC_COUNTER_BUFFER,				///< Atomic counter storage
+		CopyRead			= GL_COPY_READ_BUFFER,					///< Buffer copy source
+		CopyWrite			= GL_COPY_WRITE_BUFFER,					///< Buffer copy destination
+		DispatchIndirect	= GL_DISPATCH_INDIRECT_BUFFER,			///< Indirect compute dispatch commands
+		DrawIndirect		= GL_DRAW_INDIRECT_BUFFER,				///< Indirect command arguments
+		ElementArray		= GL_ELEMENT_ARRAY_BUFFER,				///< Vertex array indices
+		PixelPack			= GL_PIXEL_PACK_BUFFER,					///< Pixel read target
+		PixelUnpack			= GL_PIXEL_UNPACK_BUFFER,				///< Texture data source
+		Query				= GL_QUERY_BUFFER,						///< Query result buffer
+		ShaderStorage		= GL_SHADER_STORAGE_BUFFER,				///< Read-write storage for shaders
+		Texture				= GL_TEXTURE_BUFFER,					///< Texture data buffer
+		TransformFeedback	= GL_TRANSFORM_FEEDBACK_BUFFER,			///< Transform feedback buffer
+		Uniform				= GL_UNIFORM_BUFFER						///< Uniform block storage
 	};
 
 	/**

@@ -12,7 +12,7 @@
 namespace lol
 {
 	/**
-	 * Compiles shaders into a program and manages access to that program
+	 * @brief Compiles shaders into a program and manages access to that program
 	 */
 	class Shader : public NonCopyable
 	{
@@ -37,6 +37,10 @@ namespace lol
 		 * @brief Bind this shader program
 		 */
 		void Bind();
+
+		/**
+		 * @brief Unbinds the shader program
+		 */
 		void Unbind();
 
 		/**
