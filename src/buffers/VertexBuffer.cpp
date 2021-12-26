@@ -1,5 +1,4 @@
 #include <lol/buffers/VertexBuffer.hpp>
-#pragma once
 
 namespace lol
 {

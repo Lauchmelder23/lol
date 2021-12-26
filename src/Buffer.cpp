@@ -1,5 +1,4 @@
-#include "..\include\lol\Buffer.hpp"
-#pragma once
+#include <lol/Buffer.hpp>
 
 namespace lol
 {
