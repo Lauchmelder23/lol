@@ -3,6 +3,9 @@
 #include <map>
 #include <memory>
 
+#include <lol/util/NonCopyable.hpp>
+#include <lol/util/Exceptions.hpp>
+
 namespace lol
 {
 
@@ -17,75 +20,43 @@ namespace lol
 	 * As a consequence, even if no objects are using an object stored in here it will continue to
 	 * exist.
 	 */
-	template<typename Type>
 	class ObjectManager : public NonCopyable
 	{
 	public:
-		static ObjectManager<Type>& GetInstance()
-		{
-			static ObjectManager<Type> instance;
-			return instance;
-		}
+		ObjectManager() {}
 
-		/**
-		 * Add new (existing) object to manager
-		 */
-		inline void Register(unsigned int id, const std::shared_ptr<Type>& obj)
+		template<typename T, typename... Args>
+		std::shared_ptr<T> Create(unsigned int id, Args... args)
 		{
-			objects.insert(std::make_pair(id, obj));
+			std::shared_ptr<T> object = std::make_shared<T>(args...);
+			objects.insert({id, object});
+
+			return object;
 		}
 
 		/**
 		 * Remove object from manager
 		 */
-		inline void Delete(unsigned int id)
-		{
-			objects.erase(id);
-		}
+		void Delete(unsigned int id);
 
 		/**
 		 * Retrieve object from manager
 		 */
-		inline std::shared_ptr<Type> Get(unsigned int id)
+		std::shared_ptr<void> Get(unsigned int id);
+
+		template<typename T>
+		std::shared_ptr<T> Get(unsigned int id)
 		{
-			auto it = objects.find(id);
 
-			if (it == objects.end())
-				return nullptr;
-
-			return it->second;
+			std::shared_ptr<void> object = Get(id);
+			return std::static_pointer_cast<T>(object);
 		}
 
-		inline void CleanupUnused()
-		{
-			for(auto& [key, val] : objects)
-			{
-				if (val.use_count() < 3)
-					objects.erase(key);
-			}
-		}
-
-		inline void Cleanup()
-		{
-			objects.clear();
-		}
-
-		inline void Return(unsigned int id)
-		{
-			auto it = objects.find(id);
-
-			if (it == objects.end())
-				return;
-
-			if (it->second.use_count() < 3)	// I hope I don't forget about this if I ever go multithreaded
-				objects.erase(it);
-		}
+		void ClearUnused();
+		void Clear();
 
 	private:
-		ObjectManager() {}
-
-	private:
-		std::map<unsigned int, std::shared_ptr<Type>> objects;
+		std::map<unsigned int, std::shared_ptr<void>> objects;
 	};
 
 }

@@ -82,6 +82,4 @@ namespace lol
 	private:
 		unsigned int id;
 	};
-
-	typedef ObjectManager<Shader> ShaderManager;
 }

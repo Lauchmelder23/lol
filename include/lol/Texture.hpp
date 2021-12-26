@@ -28,8 +28,6 @@ namespace lol
 		unsigned int id;
 	};
 
-	typedef ObjectManager<Texture> TextureManager;
-
 
 	class Texture2D : public Texture
 	{

@@ -36,7 +36,4 @@ namespace lol
 		std::shared_ptr<ElementBuffer> elementBuffer;
 	};
 
-	// Object manager for managing said shared pointers
-	typedef ObjectManager<VertexArray> VAOManager;
-
 }
