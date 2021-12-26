@@ -40,6 +40,14 @@ namespace lol
 		void Unbind();
 
 		/**
+		 * Set a int uniform
+		 *
+		 * @param name  Name of the uniform
+		 * @param value Value of the uniform
+		 */
+		void SetUniform(const std::string& name, int value);
+
+		/**
 		 * Set a float uniform
 		 *
 		 * @param name  Name of the uniform
@@ -54,6 +62,14 @@ namespace lol
 		 * @param value Value of the uniform
 		 */
 		void SetUniform(const std::string& name, const glm::mat4& value);
+
+		/**
+		 * Set a 2 component vector uniform
+		 *
+		 * @param name  Name of the uniform
+		 * @param value Value of the uniform
+		 */
+		void SetUniform(const std::string& name, const glm::vec2& value);
 
 		/**
 		 * Set a 4 component vector uniform

@@ -12,7 +12,7 @@ namespace lol
 	{
 	public:
 		Image();
-		Image(unsigned int width, unsigned int height, PixelFormat pixelFormat = PixelFormat::RGBA, PixelType pixelType = PixelType::UByte);
+		Image(unsigned int width, unsigned int height, PixelFormat pixelFormat = PixelFormat::RGB, PixelType pixelType = PixelType::UByte);
 		Image(const std::string& filepath);
 		~Image();
 

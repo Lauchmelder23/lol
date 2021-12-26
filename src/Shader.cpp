@@ -86,6 +86,15 @@ namespace lol
 		glUseProgram(0);
 	}
 
+	void Shader::SetUniform(const std::string& name, int value)
+	{
+		GLint location = glGetUniformLocation(id, name.c_str());
+		if (location == -1)
+			return;
+
+		glUniform1i(location, value);
+	}
+
 	void Shader::SetUniform(const std::string& name, float value)
 	{
 		GLint location = glGetUniformLocation(id, name.c_str());
@@ -102,6 +111,15 @@ namespace lol
 			return;
 
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+	}
+
+	void Shader::SetUniform(const std::string& name, const glm::vec2& value)
+	{
+		GLint location = glGetUniformLocation(id, name.c_str());
+		if (location == -1)
+			return;
+
+		glUniform2fv(location, 1, glm::value_ptr(value));
 	}
 
 	void Shader::SetUniform(const std::string& name, const glm::vec4& value)

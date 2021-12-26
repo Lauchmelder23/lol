@@ -179,6 +179,24 @@ namespace lol
 		ReadWrite = GL_READ_WRITE
 	};
 
+	/** 
+	 * @brief OpenGL target texture
+	 */
+	enum class TargetTexture : GLenum
+	{
+		Texture1D 		= GL_TEXTURE_1D,
+		Texture2D 		= GL_TEXTURE_2D,
+		Texture3D 		= GL_TEXTURE_3D,
+		Array1D 		= GL_TEXTURE_1D_ARRAY,
+		Array2D 		= GL_TEXTURE_2D_ARRAY,
+		Rectangle 		= GL_TEXTURE_RECTANGLE,
+		Cubemap 		= GL_TEXTURE_CUBE_MAP,
+		CubemapArray 	= GL_TEXTURE_CUBE_MAP_ARRAY,
+		Buffer 			= GL_TEXTURE_BUFFER,
+		Multisample 	= GL_TEXTURE_2D_MULTISAMPLE,
+		MultisampleArra = GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+	};
+
 	/**
 	 * @brief OpenGL internal texture formats
 	 */
@@ -309,4 +327,13 @@ namespace lol
 			return 0;
 		}
 	}
+
+	enum class TextureWrap : GLenum
+	{
+		ClampToEdge = GL_CLAMP_TO_EDGE,
+		ClampToBorder = GL_CLAMP_TO_BORDER,
+		MirroredRepeat = GL_MIRRORED_REPEAT,
+		Repeat = GL_REPEAT,
+		MirrorClampToEdge = GL_MIRROR_CLAMP_TO_EDGE
+	};
 }
