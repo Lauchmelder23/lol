@@ -2,8 +2,8 @@
 
 namespace lol
 {
-	ElementBuffer::ElementBuffer(size_t count, const std::vector<unsigned int>& elements, Usage usage) :
-		Buffer(BufferType::ElementArray), count(count)
+	ElementBuffer::ElementBuffer(const std::vector<unsigned int>& elements, Usage usage) :
+		Buffer(BufferType::ElementArray), count(elements.size())
 	{
 		glBufferData(NATIVE(type), count * sizeof(unsigned int), elements.data(), NATIVE(usage));
 	}
