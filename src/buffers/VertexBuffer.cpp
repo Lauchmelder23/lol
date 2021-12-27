@@ -14,9 +14,9 @@ namespace lol
 	}
 
 
-	VertexBuffer::VertexBuffer(size_t size, const std::vector<float>& data, Usage usage) :
+	VertexBuffer::VertexBuffer(const std::vector<float>& data, Usage usage) :
 		Buffer(BufferType::Array), layout{}
 	{
-		glBufferData(NATIVE(type), size * sizeof(float), data.data(), NATIVE(usage));
+		glBufferData(NATIVE(type), data.size() * sizeof(float), data.data(), NATIVE(usage));
 	}
 }
