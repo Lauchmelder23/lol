@@ -11,7 +11,9 @@ namespace lol
 	class CameraBase;
 
 	/**
-	 * A class that can be displayed on a screen.
+	 * @brief A class that can be displayed on a screen.
+	 * 
+	 * Has references to a VAO and a Shader that this class will use to render a scene to a camera
 	 */
 	class Drawable
 	{

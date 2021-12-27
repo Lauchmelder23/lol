@@ -7,13 +7,16 @@ namespace lol
 {
 
 	/**
-	 * An object with a position, rotation and scale
+	 * @brief An object with a position, rotation and scale
+	 * 
+	 * Represents an object in 3D space. This class handles all the
+	 * calculations needed to create a model matrix
 	 */
 	class Transformable
 	{
 	public:
 		/**
-		 * Create new object at (0, 0, 0), no rotation and default scaling (1)
+		 * @brief Create new object at (0, 0, 0), no rotation and default scaling (1)
 		 */
 		Transformable();
 

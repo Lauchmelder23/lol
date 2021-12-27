@@ -9,6 +9,8 @@ namespace lol
 	// TODO: Find better name
 
 	/**
+	 * @brief A basic camera implementation
+	 * 
 	 * A base camera object. It hides away part of the interface of a Transformable
 	 * (because e.g. scaling doesn't make sense for a camera), and adds some other
 	 * transformation functions that are useful for cameras.
@@ -65,7 +67,7 @@ namespace lol
 
 
 	/**
-	 * A camera using perspective projection
+	 * @brief A camera using perspective projection
 	 */
 	class Camera : public CameraBase
 	{
@@ -99,7 +101,7 @@ namespace lol
 
 
 	/**
-	 * A camera using orthographic projection
+	 * @brief A camera using orthographic projection
 	 */
 	class OrthogonalCamera : public CameraBase
 	{

@@ -3,7 +3,8 @@
 namespace lol
 {
 	/**
-	 * A object without copy constructors or assignment operators.
+	 * @brief An object without copy constructors or assignment operators.
+	 * 
 	 * Any object inheriting from this will not be able to be copied anymore
 	 */
 	class NonCopyable

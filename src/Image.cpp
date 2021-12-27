@@ -6,7 +6,7 @@
 namespace lol
 {
 	Image::Image() :
-		size(0), pixels(nullptr), format(PixelFormat::RGBA), type(PixelType::UByte)
+		size(0), pixels(nullptr), format(PixelFormat::RGB), type(PixelType::UByte)
 	{
 	}
 
