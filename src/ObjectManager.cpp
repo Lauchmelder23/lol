@@ -19,10 +19,12 @@ namespace lol
 
     void ObjectManager::ClearUnused()
     {
-        for(const auto& [key, value] : objects)
+        for(std::map<unsigned int, std::shared_ptr<void>>::iterator it = objects.begin(); it != objects.end();)
         {
-            if(value.unique())
-                objects.erase(key);
+            if (it->second.unique())
+                it = objects.erase(it);
+            else
+                it++;
         }
     }
 
