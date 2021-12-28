@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <lol/Buffer.hpp>
 
 namespace lol
@@ -13,7 +14,7 @@ namespace lol
 		int size;			///< Number of elements in this attribute
 		Type type;			///< Type of the attribute
 		bool normalized;	///< Whether the data is normalized
-		int offset;			///< Offset of the attribute into the vertex data
+		size_t offset;			///< Offset of the attribute into the vertex data
 
 		/**
 		 * @brief Construct a new VertexAttribute
