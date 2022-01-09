@@ -44,7 +44,7 @@ namespace lol
 		 * @return 			A shared pointer to the newly constructed object
 		 */
 		template<typename T, typename... Args>
-		std::shared_ptr<T> Create(unsigned int id, Args... args)
+		std::shared_ptr<T> Create(unsigned int id, Args&&... args)
 		{
 			std::shared_ptr<T> object = std::make_shared<T>(args...);
 			objects.insert({id, object});
