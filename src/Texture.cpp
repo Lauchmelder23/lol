@@ -52,7 +52,8 @@ namespace lol
 		Texture(TargetTexture::Texture2D)
 	{
 		glm::uvec2 imageSize = image.GetDimensions();
-		glTexImage2D(NATIVE(target), 0, NATIVE(texFormat), imageSize.x, imageSize.y, 0, NATIVE(image.GetPixelFormat()), NATIVE(image.GetPixelType()), image.GetPixels());
+		uint8_t* pixels = image.GetPixels();
+		glTexImage2D(NATIVE(target), 0, NATIVE(texFormat), imageSize.x, imageSize.y, 0, NATIVE(image.GetPixelFormat()), NATIVE(image.GetPixelType()), pixels);
 		glGenerateMipmap(NATIVE(target));
 	}
 

@@ -35,31 +35,28 @@ namespace lol
 		}
 	}
 
+	Image::Image(unsigned char* buffer, size_t len)
+	{
+		int width, height, channels;
+		pixels = stbi_load_from_memory(buffer, len, &width, &height, &channels, 0);
+
+		size = glm::uvec2(width, height);
+		type = PixelType::UByte;
+		switch (channels)
+		{
+		case 1:	format = PixelFormat::R;	break;
+		case 2:	format = PixelFormat::RG;	break;
+		case 3:	format = PixelFormat::RGB;	break;
+		case 4:	format = PixelFormat::RGBA; break;
+		default:
+			format = PixelFormat::RGB;
+			break;
+		}
+	}
+
 	Image::~Image()
 	{
 		if(pixels != nullptr)
 			stbi_image_free(pixels);
-	}
-
-	Image::Image(const Image& other)
-	{
-		size = other.size;
-		format = other.format;
-		type = other.type;
-
-		pixels = new uint8_t[size.x * size.y * SizeOf(type)];
-		*pixels = *other.pixels;
-	}
-
-	Image& Image::operator=(const Image& other)
-	{
-		size = other.size;
-		format = other.format;
-		type = other.type;
-
-		pixels = new uint8_t[size.x * size.y * SizeOf(type)];
-		*pixels = *other.pixels;
-
-		return *this;
 	}
 }

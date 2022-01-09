@@ -4,6 +4,7 @@
 
 #include <glm/glm.hpp>
 #include <lol/util/Enums.hpp>
+#include <lol/util/NonCopyable.hpp>
 
 namespace lol
 {
@@ -13,7 +14,7 @@ namespace lol
 	 * This class is used to store image pixel- and metadata as well as load
 	 * image files from disk. It has no OpenGL equivalent
 	 */
-	class Image
+	class Image : public NonCopyable
 	{
 	public:
 		/**
@@ -42,23 +43,9 @@ namespace lol
 		 */
 		Image(const std::string& filepath);
 
+		Image(unsigned char* buffer, size_t len);
+
 		~Image();
-
-		/**
-		 * @brief Copy data of another Image
-		 * 
-		 * @param other The Image to copy from
-		 */
-		Image(const Image& other);
-
-		/**
-		 * @brief Assign this Image data of another Image
-		 * 
-		 * @param other The Image to assign from
-		 * @return The modified Image
-		 */
-		Image& operator=(const Image& other);
-
 
 		/**
 		 * @brief Get the dimensions of the image
