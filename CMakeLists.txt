@@ -24,7 +24,9 @@ add_library(lol STATIC
 	"src/buffers/VertexBuffer.cpp" 
 	"src/buffers/ElementBuffer.cpp"
 	"src/Image.cpp"
-	"src/ObjectManager.cpp")
+	"src/ObjectManager.cpp" 
+	"src/Layer.cpp" 
+)
 
 target_include_directories(lol PUBLIC 
 	${GLM_INCLUDE_DIRS}

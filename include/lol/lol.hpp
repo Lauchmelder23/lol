@@ -8,3 +8,4 @@
 #include <lol/Image.hpp>
 #include <lol/Camera.hpp>
 #include <lol/util/BoundingBox.hpp>
+#include <lol/Layer.hpp>
